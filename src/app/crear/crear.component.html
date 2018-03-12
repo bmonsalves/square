@@ -31,9 +31,28 @@
     <label class="form-check-label" for="exampleCheck1">activo</label>
   </div>
 </div>
-
+<hr>
 <div class="row">
-  <button class="btn btn-primary col-md-6" (click)="guardarLugar()">guardar</button>
+  <div class="form-check col-md-4">
+    <label for="calle">calle y numero</label>
+    <input type="text" class="form-control" id="calle" placeholder="calle y numero" [(ngModel)]="lugar.calle">
+  </div>
+  <div class="form-check col-md-4">
+    <label for="ciudad">ciudad</label>
+    <input type="text" class="form-control" id="ciudad" placeholder="ciudad" [(ngModel)]="lugar.ciudad">
+  </div>
+  <div class="form-check col-md-4">
+    <label for="pais">pais</label>
+    <input type="text" class="form-control" id="pais" placeholder="pais" [(ngModel)]="lugar.pais">
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary col-md-4" (click)="guardarLugar()">guardar</button>
+
+  </div>
 
 </div>
 

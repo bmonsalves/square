@@ -10,6 +10,7 @@ import {CrearComponent} from "./crear/crear.component";
 import {MapComponent} from "./map/map.component";
 import {LugaresService} from "./services/lugares.service";
 import {AngularFireDatabaseModule} from "angularfire2/database";
+import {HttpClientModule} from "@angular/common/http";
 
 export const appRoutes: Routes = [
   {path:'',component:CrearComponent},
@@ -44,7 +45,8 @@ export const environment = {
     }),
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   exports: [RouterModule],
   providers: [

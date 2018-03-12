@@ -15,10 +15,24 @@ export class CrearComponent {
   }
 
   guardarLugar(){
+
     this.lugar.id = Date.now();
-    this.lugaresService.guardarLugar(this.lugar);
-    this.obtenerLugares();
+
+    this.lugaresService.obtenerGeoData(this.lugar)
+      .subscribe((geodata)=>{
+
+        console.log("-----",geodata);
+
+        this.lugar.lat = geodata.results[0].geometry.location.lat;
+        this.lugar.lng = geodata.results[0].geometry.location.lng;
+        this.lugaresService.guardarLugar(this.lugar);
+        this.obtenerLugares();
+        this.geo = geodata;
+
+      })
+
   }
+
 
   obtenerLugares(){
     this.lugaresService.getLugares()
