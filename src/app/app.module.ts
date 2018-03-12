@@ -11,10 +11,12 @@ import {MapComponent} from "./map/map.component";
 import {LugaresService} from "./services/lugares.service";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {HttpClientModule} from "@angular/common/http";
+import {LugaresComponent} from "./lugares/lugares.component";
 
 export const appRoutes: Routes = [
-  {path:'',component:CrearComponent},
-  {path:'crear',component:CrearComponent},
+  {path:'',component:LugaresComponent},
+  {path:'new',component:CrearComponent},
+  {path:'update/:id',component:CrearComponent},
   {path:'map',component:MapComponent}
 ];
 
@@ -35,7 +37,8 @@ export const environment = {
   declarations: [
     AppComponent,
     CrearComponent,
-    MapComponent
+    MapComponent,
+    LugaresComponent
   ],
   imports: [
     BrowserModule,

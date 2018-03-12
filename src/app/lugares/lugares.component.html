@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4>lista desde firebase</h4>
+
+    <ul>
+      <ng-container *ngFor="let lugar of lugares">
+
+        <li>
+          <a [routerLink]="['/update', lugar.id]">
+            <pre>{{lugar | json}}</pre>
+          </a>
+        </li>
+
+      </ng-container>
+    </ul>
+
+  </div>
+
+</div>

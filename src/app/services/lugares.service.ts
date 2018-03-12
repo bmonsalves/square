@@ -26,4 +26,7 @@ export class LugaresService{
     //http://maps.google.com/maps/api/geocode/json?address=9-55+calle+72,+Bogota,Colombia
     return this.http.get(`http://maps.google.com/maps/api/geocode/json?address=${lugar.calle},${lugar.ciudad},${lugar.pais}`);
   }
+  public getLugar(id){
+    return this.afDB.object(`lugares/${id}`);
+  }
 }
