@@ -33,6 +33,9 @@ export class LugaresService{
     const headers = new HttpHeaders({"Content-Type":"application/json"});
     return this.http.post(`${this.API_URL}/lugares.json`, lugar, {headers:headers});
   }
+  public editarLugar(lugar){
+    return this.afDB.database.ref('lugares/'+lugar.id).set(lugar);
+  }
   public obtenerGeoData(lugar){
     //http://maps.google.com/maps/api/geocode/json?address=9-55+calle+72,+Bogota,Colombia
     return this.http.get(`http://maps.google.com/maps/api/geocode/json?address=${lugar.calle},${lugar.ciudad},${lugar.pais}`);

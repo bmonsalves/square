@@ -12,6 +12,7 @@ import {LugaresService} from "./services/lugares.service";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {HttpClientModule} from "@angular/common/http";
 import {LugaresComponent} from "./lugares/lugares.component";
+import {LinkifyPipe} from "./pipes/linkify.pipe";
 
 export const appRoutes: Routes = [
   {path:'',component:LugaresComponent},
@@ -38,7 +39,8 @@ export const environment = {
     AppComponent,
     CrearComponent,
     MapComponent,
-    LugaresComponent
+    LugaresComponent,
+    LinkifyPipe
   ],
   imports: [
     BrowserModule,

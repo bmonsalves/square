@@ -14,7 +14,7 @@ export class CrearComponent {
   constructor(private lugaresService: LugaresService, private route: ActivatedRoute){
 
     this.id = this.route.snapshot.params['id'];
-    if(this.id){
+    if(this.id != null){
       this.lugaresService.getLugar(this.id)
           .valueChanges()
           .subscribe((lugar)=>{
@@ -26,10 +26,13 @@ export class CrearComponent {
 
   guardarLugar(){
 
-    if(!this.id){
-      this.lugar.id = Date.now();
+    if(this.id != null){
+      this.lugaresService.editarLugar(this.lugar)
+      alert('editado')
+      return;
     }
 
+    this.lugar.id = Date.now();
     this.lugaresService.obtenerGeoData(this.lugar)
       .subscribe((geodata)=>{
 

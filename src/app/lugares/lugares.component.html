@@ -2,13 +2,14 @@
   <div class="col-md-12">
     <h4>lista desde firebase</h4>
 
-    <ul>
+    <ul class="list-group">
       <ng-container *ngFor="let lugar of lugares">
 
-        <li>
+        <li class="list-group-item">
           <a [routerLink]="['/update', lugar.id]">
-            <pre>{{lugar | json}}</pre>
+            <p><b>{{lugar.nombre ? lugar.nombre : 'sin nombre' }}</b></p>
           </a>
+          <p><small [innerHtml]="lugar.descripcion | linkify"></small></p>
         </li>
 
       </ng-container>
