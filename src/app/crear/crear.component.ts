@@ -38,7 +38,12 @@ export class CrearComponent {
           this.lugar.lng = geodata.results[0].geometry.location.lng;
         }
 
-        this.lugaresService.guardarLugar(this.lugar);
+        this.lugaresService.guardarLugar(this.lugar)
+          .subscribe((response)=>{
+            alert("guardado");
+            console.log(response);
+          });
+
       })
 
   }

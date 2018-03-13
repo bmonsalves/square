@@ -15,9 +15,10 @@ export class LugaresComponent {
 
   obtenerLugares(){
     this.lugaresService.getLugares()
-      .valueChanges()
       .subscribe((lugares)=>{
-        this.lugares = lugares;
+        this.lugares = Object.keys(lugares).map((key) => lugares[key]);
+      },(error)=>{
+        console.log(error)
       })
   }
 }

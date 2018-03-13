@@ -1,8 +1,11 @@
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database/database";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient,HttpHeaders} from "@angular/common/http";
 @Injectable()
 export class LugaresService{
+
+  API_URL:String = 'https://square-1520381533872.firebaseio.com';
+
   lugares:any = [
     {id: 1, plan: 'pagado', cercania: 1, distancia: 1, active: true, nombre:'Florería la Gardenia'},
     {id: 2, plan: 'gratuito', cercania: 1, distancia: 1.8, active: true, nombre:'Donas la pasadita'},
@@ -13,14 +16,22 @@ export class LugaresService{
   ];
   constructor(private afDB:AngularFireDatabase, private http:HttpClient){}
   public getLugares(){
-    return this.afDB.list('lugares/');
+    //acceso via socket
+    //return this.afDB.list('lugares/');
+    const headers = new HttpHeaders({"Content-Type":"application/json"});
+    return this.http.get(`${this.API_URL}/lugares.json`);
+
   }
   public buscarLugar(id){
     return this.lugares.filter((lugar) => { return lugar.id == id})[0] || null;
   }
   public guardarLugar(lugar){
-    console.log(lugar);
-    this.afDB.database.ref(`lugares/${lugar.id}`).set(lugar);
+    //acceso via socket
+    //this.afDB.database.ref(`lugares/${lugar.id}`).set(lugar);
+
+    //acceso via http
+    const headers = new HttpHeaders({"Content-Type":"application/json"});
+    return this.http.post(`${this.API_URL}/lugares.json`, lugar, {headers:headers});
   }
   public obtenerGeoData(lugar){
     //http://maps.google.com/maps/api/geocode/json?address=9-55+calle+72,+Bogota,Colombia
