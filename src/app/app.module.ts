@@ -13,12 +13,18 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
 import {HttpClientModule} from "@angular/common/http";
 import {LugaresComponent} from "./lugares/lugares.component";
 import {LinkifyPipe} from "./pipes/linkify.pipe";
+import {LoginComponent} from "./login/login.component";
+import {RegistroComponent} from "./registro/registro.component";
+import {AuthService} from "./services/auth.service";
+import {AngularFireAuthModule} from "angularfire2/auth";
 
 export const appRoutes: Routes = [
   {path:'',component:LugaresComponent},
   {path:'new',component:CrearComponent},
   {path:'update/:id',component:CrearComponent},
-  {path:'map',component:MapComponent}
+  {path:'map',component:MapComponent},
+  {path:'login',component:LoginComponent},
+  {path:'registro',component:RegistroComponent}
 ];
 
 export const environment = {
@@ -40,6 +46,8 @@ export const environment = {
     CrearComponent,
     MapComponent,
     LugaresComponent,
+    LoginComponent,
+    RegistroComponent,
     LinkifyPipe
   ],
   imports: [
@@ -51,11 +59,13 @@ export const environment = {
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     HttpClientModule
   ],
   exports: [RouterModule],
   providers: [
-    LugaresService
+    LugaresService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

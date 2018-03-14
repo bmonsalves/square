@@ -5,7 +5,7 @@ import {HttpClient,HttpHeaders} from "@angular/common/http";
 export class LugaresService{
 
   API_URL:String = 'https://square-1520381533872.firebaseio.com';
-
+  ls:any = {};
   lugares:any = [
     {id: 1, plan: 'pagado', cercania: 1, distancia: 1, active: true, nombre:'Florería la Gardenia'},
     {id: 2, plan: 'gratuito', cercania: 1, distancia: 1.8, active: true, nombre:'Donas la pasadita'},
@@ -18,8 +18,12 @@ export class LugaresService{
   public getLugares(){
     //acceso via socket
     //return this.afDB.list('lugares/');
+    if(window.localStorage){
+      this.ls = localStorage.getItem('firebase:authUser:AIzaSyAPVuKucwSB72vsXGS8OQTh6Nvxr0wiMP0:[DEFAULT]')
+      this.ls = JSON.parse(this.ls)
+    }
     const headers = new HttpHeaders({"Content-Type":"application/json"});
-    return this.http.get(`${this.API_URL}/lugares.json`);
+    return this.http.get(`${this.API_URL}/lugares.json?auth=${this.ls.stsTokenManager.accessToken}`);
 
   }
   public buscarLugar(id){
