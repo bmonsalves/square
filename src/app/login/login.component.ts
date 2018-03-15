@@ -18,6 +18,11 @@ export class LoginComponent {
     this.authService.login(this.registro.email,this.registro.password);
   }
 
+  facebookLogin(){
+    this.authService.facebookLogin();
+
+  }
+
 
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'container-component',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
 })
 
 export class ContainerComponent {
+
+  constructor(private authService: AuthService){
+
+  }
+
+  logOut(){
+    this.authService.logOut();
+  }
 
 }

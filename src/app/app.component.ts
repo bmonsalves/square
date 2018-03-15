@@ -11,12 +11,17 @@ import {Router} from "@angular/router";
 export class AppComponent {
   isLogged:boolean = false;
 
-  constructor(private authService:AuthService,private router:Router){
+  constructor(private authService:AuthService){
 
     authService.isLogged()
       .subscribe(result => {
 
-      this.isLogged = !!(result && result.uid);
+        if (result && result.uid){
+          this.isLogged = true;
+          return;
+        }
+
+        this.isLogged = false;
 
     }, err => {
       this.isLogged = false
