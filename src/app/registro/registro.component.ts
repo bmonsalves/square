@@ -14,7 +14,7 @@ export class RegistroComponent {
   }
 
   registrar(){
-    this.authService.registro(this.registro.email,this.registro.password)
+    this.authService.registro(this.registro.email,this.registro.password);
   }
 
 

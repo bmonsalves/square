@@ -17,14 +17,24 @@ import {LoginComponent} from "./login/login.component";
 import {RegistroComponent} from "./registro/registro.component";
 import {AuthService} from "./services/auth.service";
 import {AngularFireAuthModule} from "angularfire2/auth";
+import {GuardService} from "./services/guard.service";
+import {ContainerComponent} from "./container/container.component";
 
 export const appRoutes: Routes = [
-  {path:'',component:LugaresComponent},
-  {path:'new',component:CrearComponent},
-  {path:'update/:id',component:CrearComponent},
-  {path:'map',component:MapComponent},
-  {path:'login',component:LoginComponent},
-  {path:'registro',component:RegistroComponent}
+  {path:'',component:LoginComponent},
+  {path:'registro',component:RegistroComponent},
+  { path:'app',
+    component:ContainerComponent,
+    canActivate:[GuardService],
+    children:[
+      {path: '', redirectTo: 'lugares', pathMatch: 'full' },
+      {path: 'lugares', component:LugaresComponent },
+      {path:'new',component:CrearComponent},
+      {path:'update/:id',component:CrearComponent},
+      {path:'map',component:MapComponent},
+    ]
+  },
+
 ];
 
 export const environment = {
@@ -48,6 +58,7 @@ export const environment = {
     LugaresComponent,
     LoginComponent,
     RegistroComponent,
+    ContainerComponent,
     LinkifyPipe
   ],
   imports: [
@@ -65,7 +76,8 @@ export const environment = {
   exports: [RouterModule],
   providers: [
     LugaresService,
-    AuthService
+    AuthService,
+    GuardService
   ],
   bootstrap: [AppComponent]
 })

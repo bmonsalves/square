@@ -6,7 +6,7 @@
       <ng-container *ngFor="let lugar of lugares">
 
         <li class="list-group-item">
-          <a [routerLink]="['/update', lugar.id]">
+          <a [routerLink]="['../update', lugar.id]">
             <p><b>{{lugar.nombre ? lugar.nombre : 'sin nombre' }}</b></p>
           </a>
           <p><small [innerHtml]="lugar.descripcion | linkify"></small></p>

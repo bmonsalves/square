@@ -15,8 +15,7 @@ export class LoginComponent {
   }
 
   login(){
-    this.authService.login(this.registro.email,this.registro.password)
-
+    this.authService.login(this.registro.email,this.registro.password);
   }
 
 

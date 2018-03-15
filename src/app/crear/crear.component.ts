@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 
 export class CrearComponent {
   lugar:any = {};
+  geodata:any = {};
   id:number = null;
 
   constructor(private lugaresService: LugaresService, private route: ActivatedRoute){
@@ -36,9 +37,10 @@ export class CrearComponent {
     this.lugaresService.obtenerGeoData(this.lugar)
       .subscribe((geodata)=>{
 
-        if(geodata){
-          this.lugar.lat = geodata.results[0].geometry.location.lat;
-          this.lugar.lng = geodata.results[0].geometry.location.lng;
+        this.geodata = geodata;
+        if(this.geodata){
+          this.lugar.lat = this.geodata.results[0].geometry.location.lat;
+          this.lugar.lng = this.geodata.results[0].geometry.location.lng;
         }
 
         this.lugaresService.guardarLugar(this.lugar)
