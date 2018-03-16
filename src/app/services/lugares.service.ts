@@ -1,10 +1,12 @@
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database/database";
 import {HttpClient,HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 @Injectable()
 export class LugaresService{
 
-  API_URL:String = 'https://square-1520381533872.firebaseio.com';
+  API_URL:string = 'https://square-1520381533872.firebaseio.com';
+  SEARCH_URL:string = 'https://maps.google.com/maps/api/geocode/json';
   ls:any = {};
   lugares:any = [
     {id: 1, plan: 'pagado', cercania: 1, distancia: 1, active: true, nombre:'Florería la Gardenia'},
@@ -34,8 +36,13 @@ export class LugaresService{
     //this.afDB.database.ref(`lugares/${lugar.id}`).set(lugar);
 
     //acceso via http
+    if(window.localStorage){
+      this.ls = localStorage.getItem('firebase:authUser:AIzaSyAPVuKucwSB72vsXGS8OQTh6Nvxr0wiMP0:[DEFAULT]')
+      this.ls = JSON.parse(this.ls)
+    }
+
     const headers = new HttpHeaders({"Content-Type":"application/json"});
-    return this.http.post(`${this.API_URL}/lugares.json`, lugar, {headers:headers});
+    return this.http.post(`${this.API_URL}/lugares.json?auth=${this.ls.stsTokenManager.accessToken}`, lugar, {headers:headers});
   }
   public editarLugar(lugar){
     return this.afDB.database.ref('lugares/'+lugar.id).set(lugar);
@@ -46,5 +53,15 @@ export class LugaresService{
   }
   public getLugar(id){
     return this.afDB.object(`lugares/${id}`);
+  }
+
+  public mapSearch(searchTerm){
+    if(searchTerm){
+      let test = this.http.get(`${this.SEARCH_URL}?address=${searchTerm}`)
+      console.log(test);
+      return  test
+    }
+
+    return Observable.of([]);
   }
 }
