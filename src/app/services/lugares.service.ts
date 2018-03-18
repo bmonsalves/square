@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database/database";
 import {HttpClient,HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+
 @Injectable()
 export class LugaresService{
 
